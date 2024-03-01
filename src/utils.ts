@@ -3,21 +3,6 @@ import { AutocompleteInteraction, CacheType, CommandInteraction } from "discord.
 import logger from "./logger";
 import { GuardFunction } from "discordx";
 
-const rateLimitGuard = (time: number) =>  {
-    // const l: GuardFunction<CommandInteraction<CacheType>> = async (interaction, client, next) => {
-    //     if (interaction.isAutocomplete()) {
-    //         logger.debug("Autocomplete interaction");
-    //         return next();
-    //     }
-    //     logger.debug("Command interaction");
-    // }  
-    // return l;
-    return RateLimit(TIME_UNIT.seconds, time, {
-        ephemeral: true,
-        message: rateLimitMessage,
-    })
-}
-
 function rateLimitMessage(
     this: void,
     interaction: CommandInteraction,
@@ -35,4 +20,4 @@ function rateLimitMessage(
 
 }
 
-export { rateLimitGuard }
+export { rateLimitMessage }

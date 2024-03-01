@@ -1,0 +1,18 @@
+# Dependency directory
+node_modules
+bower_components
+
+# Build files
+build/**/*
+
+# Environment variables
+.env
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# other
+debug
+logs
+devices.json

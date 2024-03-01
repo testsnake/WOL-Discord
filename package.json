@@ -1,0 +1,39 @@
+{
+  "name": "wol-discord",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node ./build/index.js",
+    "build:start": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/testsnake/WOL-Discord.git"
+  },
+  "author": "testsnake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/testsnake/WOL-Discord/issues"
+  },
+  "homepage": "https://github.com/testsnake/WOL-Discord#readme",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@discordx/importer": "^1.3.0",
+    "@discordx/utilities": "^6.1.0",
+    "discord.js": "^14.14.1",
+    "discordx": "^11.9.0",
+    "dotenv": "^16.4.5",
+    "i18next": "^23.10.0",
+    "i18next-fs-backend": "^2.3.1",
+    "pino": "^8.19.0",
+    "pino-pretty": "^10.3.1",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2"
+  }
+}

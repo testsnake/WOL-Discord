@@ -22,11 +22,11 @@ function searchDevices(searchText: string, userId: string, requiredPermissions: 
             let hasPermissions = isUser;
             if (isUser) {
                 for (const [permission, isRequired] of Object.entries(requiredPermissions)) {
-                // Permission is required but user does not have it
-                if (isRequired && !user.permissions[permission]) {
-                    hasPermissions = false;
-                    break; // Exit loop early
-                }
+                    // Permission is required but user does not have it
+                    if (isRequired && !user.permissions[permission]) {
+                        hasPermissions = false;
+                        break; // Exit loop early
+                    }
                 }
             }
             return hasPermissions;
@@ -39,8 +39,12 @@ function searchDevices(searchText: string, userId: string, requiredPermissions: 
     }));
 }
 
-function wol(deviceId: string, interaction: any, requiredPermissions: devicePermission) {
+async function wol(deviceId: string, interaction: any, requiredPermissions: devicePermission): Promise<boolean> {
+    return false;
+}
 
+async function ping(deviceId: string, interaction: any, requiredPermissions: devicePermission): Promise<boolean>  {
+    return false;
 }
 
 export { getDevices, searchDevices, wol, devicePermission };

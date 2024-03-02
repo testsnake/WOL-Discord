@@ -47,6 +47,8 @@ export class WakeOnLan {
             },
             description: "The name of the device to wake up",
             name: "device",
+            nameLocalizations: commandLocalisation("wol.option", "name"),
+            descriptionLocalizations: commandLocalisation("wol.option", "description"),
             required: true,
             type: ApplicationCommandOptionType.String
         }) searchText: string,

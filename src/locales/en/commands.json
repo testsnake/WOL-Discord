@@ -1,6 +1,10 @@
 {
     "wol": {
         "name": "wol",
-        "description": "Wake device on LAN"
+        "description": "Wake device on LAN",
+        "option": {
+            "name": "device",
+            "description": "The name of the device to wake up"
+        }
     }
 }

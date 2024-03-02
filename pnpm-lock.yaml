@@ -11,6 +11,9 @@ dependencies:
   '@discordx/utilities':
     specifier: ^6.1.0
     version: 6.1.0(discord.js@14.14.1)(discordx@11.9.0)
+  '@types/wake_on_lan':
+    specifier: ^0.0.33
+    version: 0.0.33
   discord.js:
     specifier: ^14.14.1
     version: 14.14.1
@@ -38,6 +41,9 @@ dependencies:
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.24)(typescript@5.3.3)
+  wake_on_lan:
+    specifier: ^1.0.0
+    version: 1.0.0
 
 devDependencies:
   prettier:
@@ -243,6 +249,12 @@ packages:
     resolution: {integrity: sha512-Kza43ewS3xoLgCEpQrsT+xRo/EJej1y0kVYGiLFE1NEODXGzTfwiC6tXTLMQskn1X4/Rjlh0MQUvx9W+L9long==}
     dependencies:
       undici-types: 5.26.5
+    dev: false
+
+  /@types/wake_on_lan@0.0.33:
+    resolution: {integrity: sha512-kUDV5jTVq9iAeWfZfBhWFnLUXl5ggbCpJEYiXwMmisuQaHbfpZuo2DbOPHio9ZBMcqC45vuBAn/YKr1QRqelog==}
+    dependencies:
+      '@types/node': 20.11.24
     dev: false
 
   /@types/ws@8.5.9:
@@ -847,6 +859,13 @@ packages:
 
   /v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
+    dev: false
+
+  /wake_on_lan@1.0.0:
+    resolution: {integrity: sha512-0QSpxny0QmsssshI6kePj6cobQPK+i8r5shfj58ZfQIUH9fUTyAaYPqZO3W/Ai7mN4vQVdTdsSGIr20M81UL6Q==}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
     dev: false
 
   /which@2.0.2:

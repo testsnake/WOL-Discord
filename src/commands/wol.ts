@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Guard, Slash, SlashOption } from "discordx";
 
-import { devicePermission, wol } from "../deviceManager";
+import { devicePermission, wake } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
 import { commandLocalisation, commandDescription } from "../utils";
@@ -43,7 +43,7 @@ export class WakeOnLan {
         const deviceId = searchText;
 
         // Wake up the device
-        const result = await wol(deviceId, interaction, requiredPermissions);
+        const result = await wake(deviceId, interaction, requiredPermissions);
 
         interaction.editReply("not implemented yet!")
     }

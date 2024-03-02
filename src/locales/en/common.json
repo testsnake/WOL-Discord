@@ -1,5 +1,6 @@
 {
     "command": {
-        "timeout": "Rate limit exceeded, please try again {{time}}."
+        "timeout": "Rate limit exceeded, please try again {{time}}.",
+        "errorTitle": "Error: {{error}}"
     }
 }

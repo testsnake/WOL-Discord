@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Guard, Slash, SlashOption } from "discordx";
-import { devicePermission, ping } from "../deviceManager";
+import { ActionResult, devicePermission, sendPing } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
 import { commandLocalisation, commandDescription } from "../utils";
@@ -37,17 +37,18 @@ export class Ping {
         interaction: CommandInteraction
     ): Promise<void> {
         const sent = await interaction.deferReply({ ephemeral: true, fetchReply: true});
+        let t = getTfunc(interaction.locale);
         if (!searchText) {
-            let t = getTfunc(interaction.locale);
             let responseTime = sent.createdTimestamp - interaction.createdTimestamp;
-            interaction.editReply(t('commands:ping.response', { Latency: responseTime }));
+            interaction.editReply(t('commands:ping.botResponse', { Latency: responseTime }));
             return;
         }
-
-        // interaction.deferReply({ ephemeral: true });
-
-        const result = await ping(searchText, interaction, requiredPermissions);
-
-        interaction.editReply("not implemented yet!")
+        const result = await sendPing(searchText, interaction, requiredPermissions);
+        // check if result is an ActionResult
+        if (typeof result !== 'object') {
+            interaction.editReply(t(`common:command.errorTitle`, { error: t(`commands:ping.error`, {context: result}) } ));
+        } else {
+            interaction.editReply(t('commands:ping.deviceResponse', { context: `${result.alive}`, host: result.host, avg: result.avg, max: result.max, min: result.min, packetLoss: result.packetLoss}));
+        } 
     }
 }

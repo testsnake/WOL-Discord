@@ -1,10 +1,10 @@
-import { ApplicationCommandOptionType, AutocompleteInteraction, CommandInteraction } from "discord.js";
+import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Guard, Slash, SlashOption } from "discordx";
 
-import { devicePermission, searchDevices, wol } from "../deviceManager";
+import { devicePermission, wol } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
-import { commandLocalisation } from "../utils";
+import { commandLocalisation, commandDescription } from "../utils";
 
 const requiredPermissions: devicePermission = {
     wol: true
@@ -18,7 +18,7 @@ const requiredPermissions: devicePermission = {
 export class WakeOnLan {
     @Slash({
         name: "wol",
-        description: "Wake up a computer using Wake-on-LAN",
+        description: commandDescription("wol"),
         nameLocalizations: commandLocalisation("wol", "name"),
         descriptionLocalizations: commandLocalisation("wol", "description"),
     })
@@ -26,8 +26,8 @@ export class WakeOnLan {
     private async wol(
         @SlashOption({
             autocomplete: deviceAutoComplete(requiredPermissions),
-            description: "The name of the device to wake up",
             name: "device",
+            description: commandDescription("wol.option"),
             nameLocalizations: commandLocalisation("wol.option", "name"),
             descriptionLocalizations: commandLocalisation("wol.option", "description"),
             required: true,

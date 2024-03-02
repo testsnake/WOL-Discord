@@ -41,6 +41,10 @@ function commandLocalisation(key: string, type: ComamandStringType): Localizatio
   return localeMap;
 }
 
+function commandDescription(key: string): string {
+  return getCommandString(key, "description", Locale.EnglishUS) ?? "";
+}
+
 function deviceAutoComplete(permissions: devicePermission): (interaction: AutocompleteInteraction) => void {
   return (interaction: AutocompleteInteraction) => {
     if (interaction.inGuild() && !config.allowCommandsInGuilds) {
@@ -64,4 +68,4 @@ function deviceAutoComplete(permissions: devicePermission): (interaction: Autoco
   }
 }
 
-export { rateLimitMessage, ComamandStringType, commandLocalisation, deviceAutoComplete}
+export { rateLimitMessage, ComamandStringType, commandDescription, commandLocalisation, deviceAutoComplete}

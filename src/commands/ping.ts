@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Guard, Slash, SlashOption } from "discordx";
-import { devicePermission, wol } from "../deviceManager";
+import { devicePermission, ping } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
 import { commandLocalisation, commandDescription } from "../utils";
@@ -43,5 +43,11 @@ export class Ping {
             interaction.reply(t('commands:ping.response', { Latency: responseTime }));
             return;
         }
+
+        // interaction.deferReply({ ephemeral: true });
+
+        const result = await ping(searchText, interaction, requiredPermissions);
+
+        interaction.editReply("not implemented yet!")
     }
 }

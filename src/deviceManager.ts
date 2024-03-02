@@ -40,11 +40,22 @@ function searchDevices(searchText: string, userId: string, requiredPermissions: 
 }
 
 async function wol(deviceId: string, interaction: any, requiredPermissions: devicePermission): Promise<boolean> {
-    return false;
+    // 1 second fake delay for testing
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(false);
+        }, 5000);
+    });
+    
 }
 
 async function ping(deviceId: string, interaction: any, requiredPermissions: devicePermission): Promise<boolean>  {
-    return false;
+    // 1 second fake delay for testing
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(false);
+        }, 5000);
+    });
 }
 
-export { getDevices, searchDevices, wol, devicePermission };
+export { getDevices, searchDevices, wol, ping, devicePermission };

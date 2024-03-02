@@ -43,13 +43,8 @@ export class WakeOnLan {
         const deviceId = searchText;
 
         // Wake up the device
-        const result = wol(deviceId, interaction, requiredPermissions);
+        const result = await wol(deviceId, interaction, requiredPermissions);
 
-        setTimeout(() => {
-            interaction.editReply("result");
-        }, 1000);
-        // Send the result
-        
-        
+        interaction.editReply("not implemented yet!")
     }
 }

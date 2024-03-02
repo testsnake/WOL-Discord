@@ -36,11 +36,11 @@ export class Ping {
         }) searchText: string,
         interaction: CommandInteraction
     ): Promise<void> {
-        let date = Date.now();
+        const sent = await interaction.deferReply({ ephemeral: true, fetchReply: true});
         if (!searchText) {
             let t = getTfunc(interaction.locale);
-            let responseTime = date - interaction.createdTimestamp;
-            interaction.reply(t('commands:ping.response', { Latency: responseTime }));
+            let responseTime = sent.createdTimestamp - interaction.createdTimestamp;
+            interaction.editReply(t('commands:ping.response', { Latency: responseTime }));
             return;
         }
 

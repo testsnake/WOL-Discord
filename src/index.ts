@@ -18,8 +18,7 @@ const customLogger: ILogger = {
 
 const client = new Client({
     intents: [],
-    logger: customLogger,
-    botGuilds: `${process.env.DEV_GUILD}` ? [`${process.env.DEV_GUILD}`] : undefined,
+    logger: customLogger
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {

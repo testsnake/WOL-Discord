@@ -1,0 +1,6 @@
+{
+    "wol": {
+        "name": "wol",
+        "description": "Wake device on LAN"
+    }
+}

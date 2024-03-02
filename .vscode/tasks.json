@@ -7,7 +7,7 @@
             "command": "pnpm",
             "args": [
                 "run",
-                "build"
+                "build:dev"
             ],
             "problemMatcher": "$tsc",
             "group": {

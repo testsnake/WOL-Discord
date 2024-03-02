@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "copyLocales": "cp -r ./src/locales ./build/locales",
+    "clean": "rm -rf ./build",
+    "build": "tsc && npm run copyLocales",
     "start": "node ./build/index.js",
-    "build:start": "npm run build && npm run start"
+    "build:dev": "npm run clean && npm run build",
+    "build:start": "npm run clean && npm run build && npm run start"
   },
   "repository": {
     "type": "git",

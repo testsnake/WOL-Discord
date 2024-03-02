@@ -4,6 +4,7 @@ import config from "../config.json";
 import { devicePermission, searchDevices, wol } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { rateLimitMessage } from "../utils";
+import { commandLocalisation } from "../utils";
 
 const requiredPermissions: devicePermission = {
     wol: true
@@ -17,7 +18,9 @@ const requiredPermissions: devicePermission = {
 export class WakeOnLan {
     @Slash({
         name: "wol",
-        description: "Wake up a computer using Wake-on-LAN"
+        description: "Wake up a computer using Wake-on-LAN",
+        nameLocalizations: commandLocalisation("wol", "name"),
+        descriptionLocalizations: commandLocalisation("wol", "description"),
     })
     
     private async wol(
@@ -51,7 +54,7 @@ export class WakeOnLan {
     ): Promise<void> {
             
         // Command Handler
-        //interaction.deferReply();
+        interaction.deferReply({ ephemeral: true });
 
         // Get the device ID
         const deviceId = searchText;
@@ -59,8 +62,11 @@ export class WakeOnLan {
         // Wake up the device
         const result = wol(deviceId, interaction, requiredPermissions);
 
+        setTimeout(() => {
+            interaction.editReply("result");
+        }, 1000);
         // Send the result
-        interaction.reply("peepeepoopoo")
+        
         
     }
 }

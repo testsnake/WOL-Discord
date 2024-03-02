@@ -6,6 +6,7 @@ import logger from "./logger";
 import { ILogger, Client } from "discordx";
 import dotenv from 'dotenv';
 import { Interaction } from "discord.js";
+import { i18nReady } from "./i18n";
 dotenv.config();
 
 const customLogger: ILogger = {
@@ -35,6 +36,7 @@ client.once("ready", async () => {
 });
 
 async function start() {
+    await i18nReady; // Wait for i18n to be ready
     await importx(__dirname + "/{events,commands,api}/**/*.{ts,js}");
     await client.login(`${process.env.DISCORD_BOT_TOKEN}`);
 }

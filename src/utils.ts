@@ -1,6 +1,8 @@
-import { CommandInteraction, LocalizationMap, Locale } from "discord.js";
+import { CommandInteraction, LocalizationMap, Locale, AutocompleteInteraction } from "discord.js";
 import logger from "./logger";
 import { i18nReady, getTfunc, getCommandString } from "./i18n";
+import config from "./config.json";
+import { devicePermission, searchDevices } from "./deviceManager";
 
 
 function rateLimitMessage(
@@ -39,4 +41,27 @@ function commandLocalisation(key: string, type: ComamandStringType): Localizatio
   return localeMap;
 }
 
-export { rateLimitMessage, ComamandStringType, commandLocalisation }
+function deviceAutoComplete(permissions: devicePermission): (interaction: AutocompleteInteraction) => void {
+  return (interaction: AutocompleteInteraction) => {
+    if (interaction.inGuild() && !config.allowCommandsInGuilds) {
+        // Not allowed to use commands in guilds
+        // Return an empty array to indicate that no results were found
+        interaction.respond([]);
+        return;
+    } else {
+        // Get user input
+        const focusedValue = interaction.options.getFocused();
+  
+        // Get the user's ID and required permissions
+        const userId = interaction.user.id;
+  
+        // Search for devices
+        const devices = searchDevices(focusedValue, userId, permissions);
+        
+        // Return the results
+        interaction.respond(devices);
+    }
+  }
+}
+
+export { rateLimitMessage, ComamandStringType, commandLocalisation, deviceAutoComplete}

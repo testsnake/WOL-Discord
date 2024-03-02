@@ -18,18 +18,18 @@ function searchDevices(searchText: string, userId: string, requiredPermissions: 
         
         // Permission check
         const userHasPermission = device.permittedUsers.some((user: any) => {
-        const isUser = user.id === userId;
-        let hasPermissions = isUser;
-        if (isUser) {
-            for (const [permission, isRequired] of Object.entries(requiredPermissions)) {
-            // Permission is required but user does not have it
-            if (isRequired && !user.permissions[permission]) {
-                hasPermissions = false;
-                break; // Exit loop early
+            const isUser = user.id === userId;
+            let hasPermissions = isUser;
+            if (isUser) {
+                for (const [permission, isRequired] of Object.entries(requiredPermissions)) {
+                // Permission is required but user does not have it
+                if (isRequired && !user.permissions[permission]) {
+                    hasPermissions = false;
+                    break; // Exit loop early
+                }
+                }
             }
-            }
-        }
-        return hasPermissions;
+            return hasPermissions;
         });
 
         return isMatch && userHasPermission;

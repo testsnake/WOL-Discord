@@ -35,3 +35,10 @@ Configure the device settings in ./src/devices.json
     ]
 }
 ```
+Build and run
+```bash
+npm run build:start
+# or
+npm run build
+npm run start
+``` 

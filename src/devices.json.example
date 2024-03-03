@@ -11,7 +11,8 @@
                 {
                     "id": "308994132968210433",
                     "permissions": {
-                        "wol": true
+                        "wol": true,
+                        "ping": true
                     }
                 }
             ]

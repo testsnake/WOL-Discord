@@ -36,7 +36,7 @@ async function waitForDeviceLoad(): Promise<void> {
     // Load devices from json
     const fileContent = await fs.readFile(config.devicesFilePath, { encoding: 'utf8' });
     devices = JSON.parse(fileContent);
-    logger.info('Devices loaded');    
+    logger.info('Devices loaded');
 }
 
 enum ActionResult {
@@ -47,7 +47,7 @@ enum ActionResult {
     InvalidConfiguration = 'invalidconfiguration'
 }
 
-function searchDevices( 
+function searchDevices(
     searchText: string,
     userId: string,
     requiredPermissions: devicePermission
@@ -56,7 +56,7 @@ function searchDevices(
     return devices.list
         .filter((device: any) => {
             // Check device name
-            const isMatch = device.name.toLowerCase().includes(search)
+            const isMatch = device.name.toLowerCase().includes(search);
 
             // Permission check
             const userHasPermission = permissionCheck(device, userId, requiredPermissions);
@@ -87,7 +87,7 @@ async function wake(
         logger.info(`User ${interaction.user.id} does not have permission to wake device ${device.id}`);
         return { result: ActionResult.DeviceNotFound };
     }
-    
+
     if (!device.network.macAddress) {
         logger.error(`Device ${device.id} does not have a MAC address configured`);
         return { result: ActionResult.InvalidConfiguration };

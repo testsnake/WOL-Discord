@@ -23,9 +23,9 @@ function rateLimitMessage(this: void, interaction: CommandInteraction, timeLeft:
     );
 }
 
-type ComamandStringType = 'name' | 'description';
+type CommandStringType = 'name' | 'description';
 
-function commandLocalisation(key: string, type: ComamandStringType): LocalizationMap {
+function commandLocalisation(key: string, type: CommandStringType): LocalizationMap {
     const localeMap: LocalizationMap = {};
     for (const locale of Object.values(Locale)) {
         localeMap[locale] = getCommandString(key, type, locale as Locale);
@@ -63,4 +63,4 @@ function deviceAutoComplete(permissions: devicePermission): (interaction: Autoco
     };
 }
 
-export { rateLimitMessage, ComamandStringType, commandDescription, commandLocalisation, deviceAutoComplete };
+export { rateLimitMessage, CommandStringType, commandDescription, commandLocalisation, deviceAutoComplete };

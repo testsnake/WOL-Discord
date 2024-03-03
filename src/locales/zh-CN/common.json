@@ -1,0 +1,6 @@
+{
+    "command": {
+        "timeout": "超出速率限制，请在{{time}}再试",
+        "errorTitle": "错误：{{error}}"
+    }
+}

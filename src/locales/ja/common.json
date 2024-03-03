@@ -1,0 +1,6 @@
+{
+    "command": {
+        "timeout": "レート制限を超えました{{time}}に再試行してください",
+        "errorTitle": "エラー: {{error}}"
+    }
+}

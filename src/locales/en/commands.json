@@ -1,18 +1,19 @@
 {
     "wol": {
         "name": "wol",
-        "description": "Wake device on LAN",
+        "description": "Wake-on-LAN",
         "option": {
             "name": "device",
             "description": "The name of the device to wake up"
         },
         "deviceResponse": "Unknown response\n- Device: `{{device}}`",
-        "deviceResponse_success": "`{{device}}` has been sent a wake-on-lan packet",
-        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) has been sent a wake-on-lan packet",
-        "deviceResponse_actionfailed": "Failed to send wake-on-lan packet to `{{device}}`",
-        "deviceResponse_actionfailed_mac": "Failed to send wake-on-lan packet to `{{device}}` (`{{mac}}`)",
+        "deviceResponse_success": "`{{device}}` has been sent a Wake-on-LAN packet",
+        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) has been sent a Wake-on-LAN packet",
+        "deviceResponse_actionfailed": "Failed to send Wake-on-LAN packet to `{{device}}`",
+        "deviceResponse_actionfailed_mac": "Failed to send Wake-on-LAN packet to `{{device}}` (`{{mac}}`)",
         "deviceResponse_devicenotfound": "Device not found",
-        "deviceResponse_permissiondenied": "Permission denied"
+        "deviceResponse_permissiondenied": "Permission denied",
+        "deviceResponse_invalidconfiguration": "Invalid configuration"
     },
     "ping": {
         "name": "ping",
@@ -31,6 +32,7 @@
         "error_devicenotfound": "Device not found",
         "error_permissiondenied": "Permission denied",
         "error_timeout": "Timeout",
-        "error_actionfailed": "Action failed"
+        "error_actionfailed": "Action failed",
+        "error_invalidconfiguration": "Invalid configuration"
     }
 }

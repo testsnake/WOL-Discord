@@ -1,0 +1,38 @@
+{
+    "wol": {
+        "name": "wol",
+        "description": "Wake-on-LAN",
+        "option": {
+            "name": "設備",
+            "description": "要喚醒的設備名稱"
+        },
+        "deviceResponse": "未知回應\n- 設備: `{{device}}`",
+        "deviceResponse_success": "`{{device}}` 已發送Wake-on-LAN封包",
+        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) 已發送Wake-on-LAN封包",
+        "deviceResponse_actionfailed": "向`{{device}}`發送Wake-on-LAN封包失敗",
+        "deviceResponse_actionfailed_mac": "向`{{device}}` (`{{mac}}`) 發送Wake-on-LAN封包失敗",
+        "deviceResponse_devicenotfound": "找不到設備",
+        "deviceResponse_permissiondenied": "權限被拒絕",
+        "deviceResponse_invalidconfiguration": "配置無效"
+    },
+    "ping": {
+        "name": "ping",
+        "description": "Ping設備",
+        "option": {
+            "name": "設備",
+            "description": "要ping的設備名稱，留空則ping機器人"
+        },
+        "botResponse": "Pong! 延遲: `{{Latency}}ms`",
+        "deviceResponse": "未知回應\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- 數據包丟失: `{{packetLoss}}%`",
+        "deviceResponse_true_true": "`{{host}}` 在線\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- 數據包丟失: `{{packetLoss}}%`",
+        "deviceResponse_false_true": "`{{host}}` 離線",
+        "deviceResponse_true_false": "設備在線\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- 數據包丟失: `{{packetLoss}}%`",
+        "deviceResponse_false_false": "設備離線",
+        "error": "未知錯誤",
+        "error_devicenotfound": "找不到設備",
+        "error_permissiondenied": "權限被拒絕",
+        "error_timeout": "超時",
+        "error_actionfailed": "操作失敗",
+        "error_invalidconfiguration": "配置無效"
+    }
+}

@@ -19,7 +19,7 @@ Create a new file called .env and add a Discord bot token
 DISCORD_BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN
 ```
 
-Configure the device settings in ./src/devices.json
+Configure the device settings in devices.json
 
 ```json
 {

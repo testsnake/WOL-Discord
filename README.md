@@ -1,17 +1,26 @@
 # WOL-Discord
-WOL-Discord is a TypeScript Discord bot that allows for waking up devices using [Wake-On-Lan](https://en.wikipedia.org/wiki/Wake-on-LAN) (WOL)
+
+WOL-Discord is a TypeScript Discord bot that allows for waking up devices using
+[Wake-On-Lan](https://en.wikipedia.org/wiki/Wake-on-LAN) (WOL)
+
 ## Setup
-Install dependencies 
+
+Install dependencies
+
 ```bash
 npm install
 # or
 pnpm install
 ```
+
 Create a new file called .env and add a Discord bot token
+
 ```dosini
 DISCORD_BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN
-``` 
+```
+
 Configure the device settings in ./src/devices.json
+
 ```
 {
     "list": [
@@ -35,10 +44,12 @@ Configure the device settings in ./src/devices.json
     ]
 }
 ```
+
 Build and run
+
 ```bash
 npm run build:start
 # or
 npm run build
 npm run start
-``` 
+```

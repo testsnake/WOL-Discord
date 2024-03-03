@@ -1,0 +1,47 @@
+name: Auto-Format on PR Merge
+
+on:
+    pull_request:
+        types: [closed]
+        branches:
+            - main
+
+jobs:
+    format-and-commit:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.merged == true
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  ref: ${{ github.event.pull_request.head.ref }}
+                  fetch-depth: 0
+                  persist-credentials: true
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '21'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run Prettier
+              run: npm run format
+
+            - name: Check for changes
+              id: git-check
+              run: |
+                  if git diff --exit-code; then
+                    echo "::set-output name=changes::false"
+                  else
+                    echo "::set-output name=changes::true"
+                  fi
+
+            - name: Commit and Push changes
+              if: steps.git-check.outputs.changes == 'true'
+              uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: '[AUTO] Apply code formatting'
+                  branch: main
+                  file_pattern: src/**/*.*

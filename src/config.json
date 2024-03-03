@@ -1,5 +1,6 @@
 {
     "allowCommandsInGuilds": true,
     "showDeviceIP": true,
-    "showDeviceMac": true
+    "showDeviceMac": true,
+    "devicesFilePath": "./devices.json"
 }

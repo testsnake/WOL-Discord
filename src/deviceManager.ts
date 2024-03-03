@@ -1,6 +1,9 @@
 import { CommandInteraction, Interaction } from 'discord.js';
 import wol, { WakeOptions } from 'wake_on_lan';
 import ping from 'ping';
+import fs from 'fs/promises';
+import config from './config.json';
+import logger from './logger';
 
 let devices: Devices;
 
@@ -14,7 +17,7 @@ type Device =
     | {
           id: string;
           name: string;
-          network?: {
+          network: {
               macAddress?: string;
               ipAddress?: string;
           };
@@ -29,18 +32,22 @@ type Devices = {
     list: Device[];
 };
 
-async function getDevices(): Promise<void> {
+async function waitForDeviceLoad(): Promise<void> {
     // Load devices from json
+    const fileContent = await fs.readFile(config.devicesFilePath, { encoding: 'utf8' });
+    devices = JSON.parse(fileContent);
+    logger.info('Devices loaded');    
 }
 
 enum ActionResult {
     Success = 'success',
     DeviceNotFound = 'devicenotfound',
     PermissionDenied = 'permissiondenied',
-    ActionFailed = 'actionfailed'
+    ActionFailed = 'actionfailed',
+    InvalidConfiguration = 'invalidconfiguration'
 }
 
-function searchDevices(
+function searchDevices( 
     searchText: string,
     userId: string,
     requiredPermissions: devicePermission
@@ -49,7 +56,7 @@ function searchDevices(
     return devices.list
         .filter((device: any) => {
             // Check device name
-            const isMatch = device.name.toLowerCase().includes(search);
+            const isMatch = device.name.toLowerCase().includes(search)
 
             // Permission check
             const userHasPermission = permissionCheck(device, userId, requiredPermissions);
@@ -67,8 +74,9 @@ async function wake(
     interaction: Interaction | CommandInteraction,
     requiredPermissions: devicePermission
 ): Promise<{ result: ActionResult; device?: string; mac?: string }> {
-    const device: Device = getDevices().list.find((device: any) => device.id === deviceId);
+    const device: Device = devices.list.find((device: any) => device.id === deviceId);
     if (!device) {
+        logger.info(`User ${interaction.user.id} tried to wake device ${deviceId} but it was not found`);
         return { result: ActionResult.DeviceNotFound };
     }
     // permission check
@@ -76,12 +84,22 @@ async function wake(
 
     // Fake device not found to avoid leaking device information
     if (!userHasPermission) {
+        logger.info(`User ${interaction.user.id} does not have permission to wake device ${device.id}`);
         return { result: ActionResult.DeviceNotFound };
     }
+    
+    if (!device.network.macAddress) {
+        logger.error(`Device ${device.id} does not have a MAC address configured`);
+        return { result: ActionResult.InvalidConfiguration };
+    }
     try {
-        const options: WakeOptions = {
-            address: device.network.ipAddress
-        };
+        let options: WakeOptions = {};
+
+        if (device.network.ipAddress) {
+            options = {
+                address: device.network.ipAddress
+            };
+        }
 
         wol.wake(device.network.macAddress, options, (error: any) => {
             if (error) {
@@ -122,6 +140,11 @@ async function sendPing(
         return ActionResult.DeviceNotFound;
     }
 
+    if (!device.network.ipAddress) {
+        // Device not configured
+        return ActionResult.InvalidConfiguration;
+    }
+
     // Ping the device
     const result = await ping.promise.probe(device.network.ipAddress);
     return result;
@@ -148,4 +171,4 @@ function permissionCheck(device: Device, userId: string, requiredPermissions: de
     return userHasPermission;
 }
 
-export { getDevices, searchDevices, wake, sendPing, devicePermission, ActionResult };
+export { waitForDeviceLoad, searchDevices, wake, sendPing, devicePermission, ActionResult };

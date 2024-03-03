@@ -7,6 +7,7 @@ import { ILogger, Client } from 'discordx';
 import dotenv from 'dotenv';
 import { Interaction } from 'discord.js';
 import { i18nReady } from './i18n';
+import { waitForDeviceLoad } from './deviceManager';
 dotenv.config();
 
 const customLogger: ILogger = {
@@ -36,6 +37,7 @@ client.once('ready', async () => {
 
 async function start() {
     await i18nReady; // Wait for i18n to be ready
+    await waitForDeviceLoad(); // Wait for devices to be loaded
     await importx(__dirname + '/{events,commands,api}/**/*.{ts,js}');
     await client.login(`${process.env.DISCORD_BOT_TOKEN}`);
 }

@@ -1,5 +1,5 @@
 import { CommandInteraction, Interaction } from "discord.js";
-import devices from "../devices.json";
+import devices from "./devices.json";
 import wol, { WakeOptions } from "wake_on_lan";
 import ping from "ping";
 

@@ -21,16 +21,13 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '21'
-                  cache: 'pnpm'
-
-            - name: Install PNPM
-              run: npm install -g pnpm
+                  cache: 'npm'
 
             - name: Install dependencies
-              run: pnpm install
+              run: npm install
 
             - name: Run Prettier
-              run: pnpm run format
+              run: npm run format
 
             - name: Check for changes
               id: git-check

@@ -1,7 +1,8 @@
 import { CommandInteraction, Interaction } from 'discord.js';
-import devices from './devices.json';
 import wol, { WakeOptions } from 'wake_on_lan';
 import ping from 'ping';
+
+let devices: Devices;
 
 type typePermission = 'wol' | 'ping';
 
@@ -13,9 +14,9 @@ type Device =
     | {
           id: string;
           name: string;
-          network: {
-              macAddress: string;
-              ipAddress: string;
+          network?: {
+              macAddress?: string;
+              ipAddress?: string;
           };
           permittedUsers: {
               id: string;
@@ -24,8 +25,12 @@ type Device =
       }
     | undefined;
 
-function getDevices() {
-    return devices;
+type Devices = {
+    list: Device[];
+};
+
+async function getDevices(): Promise<void> {
+    // Load devices from json
 }
 
 enum ActionResult {
@@ -66,7 +71,7 @@ async function wake(
     interaction: Interaction | CommandInteraction,
     requiredPermissions: devicePermission
 ): Promise<{ result: ActionResult; device?: string; mac?: string }> {
-    const device: Device = devices.list.find(
+    const device: Device = getDevices().list.find(
         (device: any) => device.id === deviceId
     );
     if (!device) {

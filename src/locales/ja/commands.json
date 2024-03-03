@@ -1,0 +1,38 @@
+{
+    "wol": {
+        "name": "wol",
+        "description": "Wake-on-LAN",
+        "option": {
+            "name": "デバイス",
+            "description": "起動するデバイスの名前"
+        },
+        "deviceResponse": "不明なレスポンス\n- デバイス: `{{device}}`",
+        "deviceResponse_success": "`{{device}}`にWake-on-LANパケットを送信しました",
+        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) にWake-on-LANパケットを送信しました",
+        "deviceResponse_actionfailed": "`{{device}}`へのWake-on-LANパケットの送信に失敗しました",
+        "deviceResponse_actionfailed_mac": "`{{device}}` (`{{mac}}`) へのWake-on-LANパケットの送信に失敗しました",
+        "deviceResponse_devicenotfound": "デバイスが見つかりません",
+        "deviceResponse_permissiondenied": "権限が拒否されました",
+        "deviceResponse_invalidconfiguration": "無効な設定です"
+    },
+    "ping": {
+        "name": "ping",
+        "description": "デバイスをpingする",
+        "option": {
+            "name": "デバイス",
+            "description": "pingするデバイスの名前、空の場合はbotをpingする"
+        },
+        "botResponse": "Pong！遅延: `{{Latency}}ms`",
+        "deviceResponse": "不明なレスポンス\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- パケット損失: `{{packetLoss}}%`",
+        "deviceResponse_true_true": "`{{host}}` はオンラインです。\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- パケット損失: `{{packetLoss}}%`",
+        "deviceResponse_false_true": "`{{host}}` はオフラインです。",
+        "deviceResponse_true_false": "デバイスはオンラインです。\n- 平均Ping: `{{avg}}`\n- 最大Ping: `{{max}}`\n- 最小Ping: `{{min}}`\n- パケット損失: `{{packetLoss}}%`",
+        "deviceResponse_false_false": "デバイスはオフラインです。",
+        "error": "不明なエラー",
+        "error_devicenotfound": "デバイスが見つかりません",
+        "error_permissiondenied": "権限が拒否されました",
+        "error_timeout": "タイムアウト",
+        "error_actionfailed": "アクションに失敗しました",
+        "error_invalidconfiguration": "無効な設定です"
+    }
+}

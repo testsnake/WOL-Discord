@@ -1,0 +1,38 @@
+{
+    "wol": {
+        "name": "wol",
+        "description": "Wake-on-LAN",
+        "option": {
+            "name": "设备",
+            "description": "要唤醒的设备名称"
+        },
+        "deviceResponse": "未知响应\n- 设备：`{{device}}`",
+        "deviceResponse_success": "`{{device}}`已发送Wake-on-LAN数据包",
+        "deviceResponse_success_mac": "`{{device}}`（`{{mac}}`）已发送Wake-on-LAN数据包",
+        "deviceResponse_actionfailed": "向`{{device}}`发送Wake-on-LAN数据包失败",
+        "deviceResponse_actionfailed_mac": "向`{{device}}`（`{{mac}}`）发送Wake-on-LAN数据包失败",
+        "deviceResponse_devicenotfound": "未找到设备",
+        "deviceResponse_permissiondenied": "权限被拒绝",
+        "deviceResponse_invalidconfiguration": "配置无效"
+    },
+    "ping": {
+        "name": "ping",
+        "description": "Ping设备",
+        "option": {
+            "name": "设备",
+            "description": "要ping的设备名称，留空则ping bot"
+        },
+        "botResponse": "Pong！延迟：`{{Latency}}ms`",
+        "deviceResponse": "未知响应\n- 平均Ping：`{{avg}}`\n- 最大Ping：`{{max}}`\n- 最小Ping：`{{min}}`\n- 丢包率：`{{packetLoss}}%`",
+        "deviceResponse_true_true": "`{{host}}`在线\n- 平均Ping：`{{avg}}`\n- 最大Ping：`{{max}}`\n- 最小Ping：`{{min}}`\n- 丢包率：`{{packetLoss}}%`",
+        "deviceResponse_false_true": "`{{host}}`离线",
+        "deviceResponse_true_false": "设备在线\n- 平均Ping：`{{avg}}`\n- 最大Ping：`{{max}}`\n- 最小Ping：`{{min}}`\n- 丢包率：`{{packetLoss}}%`",
+        "deviceResponse_false_false": "设备离线",
+        "error": "未知错误",
+        "error_devicenotfound": "未找到设备",
+        "error_permissiondenied": "权限被拒绝",
+        "error_timeout": "超时",
+        "error_actionfailed": "操作失败",
+        "error_invalidconfiguration": "配置无效"
+    }
+}

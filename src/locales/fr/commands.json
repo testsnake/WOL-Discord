@@ -1,0 +1,38 @@
+{
+    "wol": {
+        "name": "wol",
+        "description": "Wake-on-LAN",
+        "option": {
+            "name": "appareil",
+            "description": "Le nom de l'appareil à réveiller"
+        },
+        "deviceResponse": "Réponse inconnue\n- Appareil : `{{device}}`",
+        "deviceResponse_success": "`{{device}}` a reçu un paquet Wake-on-LAN",
+        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) a reçu un paquet Wake-on-LAN",
+        "deviceResponse_actionfailed": "Échec de l'envoi du paquet Wake-on-LAN à `{{device}}`",
+        "deviceResponse_actionfailed_mac": "Échec de l'envoi du paquet Wake-on-LAN à `{{device}}` (`{{mac}}`)",
+        "deviceResponse_devicenotfound": "Appareil introuvable",
+        "deviceResponse_permissiondenied": "Permission refusée",
+        "deviceResponse_invalidconfiguration": "Configuration invalide"
+    },
+    "ping": {
+        "name": "ping",
+        "description": "Ping appareil",
+        "option": {
+            "name": "appareil",
+            "description": "Le nom de l'appareil à ping, laisser vide pour ping le bot"
+        },
+        "botResponse": "Pong ! Latence : `{{Latency}}ms`",
+        "deviceResponse": "Réponse inconnue\n- Ping Moy : `{{avg}}`\n- Ping Max : `{{max}}`\n- Ping Min : `{{min}}`\n- Paquets perdus : `{{packetLoss}}%`",
+        "deviceResponse_true_true": "`{{host}}` est en ligne.\n- Ping Moy : `{{avg}}`\n- Ping Max : `{{max}}`\n- Ping Min : `{{min}}`\n- Paquets perdus : `{{packetLoss}}%`",
+        "deviceResponse_false_true": "`{{host}}` est hors ligne.",
+        "deviceResponse_true_false": "Appareil en ligne.\n- Ping Moy : `{{avg}}`\n- Ping Max : `{{max}}`\n- Ping Min : `{{min}}`\n- Paquets perdus : `{{packetLoss}}%`",
+        "deviceResponse_false_false": "Appareil hors ligne.",
+        "error": "Erreur inconnue",
+        "error_devicenotfound": "Appareil introuvable",
+        "error_permissiondenied": "Permission refusée",
+        "error_timeout": "Délai d'attente dépassé",
+        "error_actionfailed": "L'action a échoué",
+        "error_invalidconfiguration": "Configuration invalide"
+    }
+}

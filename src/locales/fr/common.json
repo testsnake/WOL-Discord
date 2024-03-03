@@ -1,0 +1,6 @@
+{
+    "command": {
+        "timeout": "Limite de taux dépassée, veuillez réessayer {{time}}.",
+        "errorTitle": "Erreur : {{error}}"
+    }
+}

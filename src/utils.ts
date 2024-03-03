@@ -1,19 +1,10 @@
-import {
-    CommandInteraction,
-    LocalizationMap,
-    Locale,
-    AutocompleteInteraction
-} from 'discord.js';
+import { CommandInteraction, LocalizationMap, Locale, AutocompleteInteraction } from 'discord.js';
 import logger from './logger';
 import { getTfunc, getCommandString } from './i18n';
 import config from './config.json';
 import { devicePermission, searchDevices } from './deviceManager';
 
-function rateLimitMessage(
-    this: void,
-    interaction: CommandInteraction,
-    timeLeft: number
-): Promise<string> {
+function rateLimitMessage(this: void, interaction: CommandInteraction, timeLeft: number): Promise<string> {
     // Delete message after timeout
     setTimeout(() => {
         try {
@@ -32,12 +23,9 @@ function rateLimitMessage(
     );
 }
 
-type ComamandStringType = 'name' | 'description';
+type CommandStringType = 'name' | 'description';
 
-function commandLocalisation(
-    key: string,
-    type: ComamandStringType
-): LocalizationMap {
+function commandLocalisation(key: string, type: CommandStringType): LocalizationMap {
     const localeMap: LocalizationMap = {};
     for (const locale of Object.values(Locale)) {
         localeMap[locale] = getCommandString(key, type, locale as Locale);
@@ -52,9 +40,7 @@ function commandDescription(key: string): string {
     return getCommandString(key, 'description', Locale.EnglishUS) ?? '';
 }
 
-function deviceAutoComplete(
-    permissions: devicePermission
-): (interaction: AutocompleteInteraction) => void {
+function deviceAutoComplete(permissions: devicePermission): (interaction: AutocompleteInteraction) => void {
     return (interaction: AutocompleteInteraction) => {
         if (interaction.inGuild() && !config.allowCommandsInGuilds) {
             // Not allowed to use commands in guilds
@@ -77,10 +63,4 @@ function deviceAutoComplete(
     };
 }
 
-export {
-    rateLimitMessage,
-    ComamandStringType,
-    commandDescription,
-    commandLocalisation,
-    deviceAutoComplete
-};
+export { rateLimitMessage, CommandStringType, commandDescription, commandLocalisation, deviceAutoComplete };

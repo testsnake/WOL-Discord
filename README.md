@@ -21,7 +21,7 @@ DISCORD_BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN
 
 Configure the device settings in ./src/devices.json
 
-```
+```json
 {
     "list": [
         {

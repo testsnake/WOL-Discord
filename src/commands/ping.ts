@@ -34,10 +34,7 @@ export class Ping {
             name: 'device',
             description: commandDescription('ping.option'),
             nameLocalizations: commandLocalisation('ping.option', 'name'),
-            descriptionLocalizations: commandLocalisation(
-                'ping.option',
-                'description'
-            ),
+            descriptionLocalizations: commandLocalisation('ping.option', 'description'),
             required: false,
             type: ApplicationCommandOptionType.String
         })
@@ -50,18 +47,11 @@ export class Ping {
         });
         let t = getTfunc(interaction.locale);
         if (!searchText) {
-            let responseTime =
-                sent.createdTimestamp - interaction.createdTimestamp;
-            interaction.editReply(
-                t('commands:ping.botResponse', { Latency: responseTime })
-            );
+            let responseTime = sent.createdTimestamp - interaction.createdTimestamp;
+            interaction.editReply(t('commands:ping.botResponse', { Latency: responseTime }));
             return;
         }
-        const result = await sendPing(
-            searchText,
-            interaction,
-            requiredPermissions
-        );
+        const result = await sendPing(searchText, interaction, requiredPermissions);
         // check if result is an ActionResult
         if (typeof result !== 'object') {
             interaction.editReply(

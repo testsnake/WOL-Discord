@@ -34,10 +34,7 @@ export class WakeOnLan {
             name: 'device',
             description: commandDescription('wol.option'),
             nameLocalizations: commandLocalisation('wol.option', 'name'),
-            descriptionLocalizations: commandLocalisation(
-                'wol.option',
-                'description'
-            ),
+            descriptionLocalizations: commandLocalisation('wol.option', 'description'),
             required: true,
             type: ApplicationCommandOptionType.String
         })
@@ -52,10 +49,7 @@ export class WakeOnLan {
         const result = await wake(searchText, interaction, requiredPermissions);
         interaction.editReply(
             t(`commands:wol.deviceResponse`, {
-                context:
-                    result.mac && config.showDeviceMac
-                        ? `${result.result}_mac`
-                        : result.result,
+                context: result.mac && config.showDeviceMac ? `${result.result}_mac` : result.result,
                 device: result.device,
                 mac: result.mac
             })

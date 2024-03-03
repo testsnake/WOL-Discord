@@ -22,11 +22,7 @@ function getTfunc(Locale: Locale) {
     return i18n.getFixedT(Locale);
 }
 
-function getCommandString(
-    key: string,
-    type: ComamandStringType,
-    locale: Locale
-) {
+function getCommandString(key: string, type: ComamandStringType, locale: Locale) {
     return i18n.t(`${key}.${type}`, { ns: 'commands', lng: locale });
 }
 

@@ -52,11 +52,7 @@ function searchDevices(
             const isMatch = device.name.toLowerCase().includes(search);
 
             // Permission check
-            const userHasPermission = permissionCheck(
-                device,
-                userId,
-                requiredPermissions
-            );
+            const userHasPermission = permissionCheck(device, userId, requiredPermissions);
 
             return isMatch && userHasPermission;
         })
@@ -71,18 +67,12 @@ async function wake(
     interaction: Interaction | CommandInteraction,
     requiredPermissions: devicePermission
 ): Promise<{ result: ActionResult; device?: string; mac?: string }> {
-    const device: Device = getDevices().list.find(
-        (device: any) => device.id === deviceId
-    );
+    const device: Device = getDevices().list.find((device: any) => device.id === deviceId);
     if (!device) {
         return { result: ActionResult.DeviceNotFound };
     }
     // permission check
-    const userHasPermission = permissionCheck(
-        device,
-        interaction.user.id,
-        requiredPermissions
-    );
+    const userHasPermission = permissionCheck(device, interaction.user.id, requiredPermissions);
 
     // Fake device not found to avoid leaking device information
     if (!userHasPermission) {
@@ -119,19 +109,13 @@ async function sendPing(
     interaction: Interaction | CommandInteraction,
     requiredPermissions: devicePermission
 ): Promise<ping.PingResponse | ActionResult> {
-    const device: Device = devices.list.find(
-        (device: any) => device.id === deviceId
-    );
+    const device: Device = devices.list.find((device: any) => device.id === deviceId);
     if (!device) {
         return ActionResult.DeviceNotFound;
     }
 
     // permission check
-    const userHasPermission = permissionCheck(
-        device,
-        interaction.user.id,
-        requiredPermissions
-    );
+    const userHasPermission = permissionCheck(device, interaction.user.id, requiredPermissions);
 
     // Fake device not found to avoid leaking device information
     if (!userHasPermission) {
@@ -143,11 +127,7 @@ async function sendPing(
     return result;
 }
 
-function permissionCheck(
-    device: Device,
-    userId: string,
-    requiredPermissions: devicePermission
-): boolean {
+function permissionCheck(device: Device, userId: string, requiredPermissions: devicePermission): boolean {
     if (!device) {
         return false;
     }
@@ -155,9 +135,7 @@ function permissionCheck(
         const isUser = user.id === userId;
         let hasPermissions = isUser;
         if (isUser) {
-            for (const [permission, isRequired] of Object.entries(
-                requiredPermissions
-            )) {
+            for (const [permission, isRequired] of Object.entries(requiredPermissions)) {
                 // Permission is required but user does not have it
                 if (isRequired && !user.permissions[permission]) {
                     hasPermissions = false;
@@ -170,11 +148,4 @@ function permissionCheck(
     return userHasPermission;
 }
 
-export {
-    getDevices,
-    searchDevices,
-    wake,
-    sendPing,
-    devicePermission,
-    ActionResult
-};
+export { getDevices, searchDevices, wake, sendPing, devicePermission, ActionResult };

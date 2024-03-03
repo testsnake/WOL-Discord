@@ -5,7 +5,14 @@
         "option": {
             "name": "device",
             "description": "The name of the device to wake up"
-        }
+        },
+        "deviceResponse": "Unknown response\n- Device: `{{device}}`",
+        "deviceResponse_success": "`{{device}}` has been sent a wake-on-lan packet",
+        "deviceResponse_success_mac": "`{{device}}` (`{{mac}}`) has been sent a wake-on-lan packet",
+        "deviceResponse_actionfailed": "Failed to send wake-on-lan packet to `{{device}}`",
+        "deviceResponse_actionfailed_mac": "Failed to send wake-on-lan packet to `{{device}}` (`{{mac}}`)",
+        "deviceResponse_devicenotfound": "Device not found",
+        "deviceResponse_permissiondenied": "Permission denied"
     },
     "ping": {
         "name": "ping",
@@ -16,8 +23,10 @@
         },
         "botResponse": "Pong! Latency: `{{Latency}}ms`",
         "deviceResponse": "Unknown response\n- Avg Ping: `{{avg}}`\n- Max Ping: `{{max}}`\n- Min Ping: `{{min}}`\n- Packets lost: `{{packetLoss}}%`",
-        "deviceResponse_true": "`{{host}}` is online.\n- Avg Ping: `{{avg}}`\n- Max Ping: `{{max}}`\n- Min Ping: `{{min}}`\n- Packets lost: `{{packetLoss}}%`",
-        "deviceResponse_false": "`{{host}}` is offline.",
+        "deviceResponse_true_true": "`{{host}}` is online.\n- Avg Ping: `{{avg}}`\n- Max Ping: `{{max}}`\n- Min Ping: `{{min}}`\n- Packets lost: `{{packetLoss}}%`",
+        "deviceResponse_false_true": "`{{host}}` is offline.",
+        "deviceResponse_true_false": "Device is online.\n- Avg Ping: `{{avg}}`\n- Max Ping: `{{max}}`\n- Min Ping: `{{min}}`\n- Packets lost: `{{packetLoss}}%`",
+        "deviceResponse_false_false": "Device is offline.",
         "error": "Unknown error",
         "error_devicenotfound": "Device not found",
         "error_permissiondenied": "Permission denied",

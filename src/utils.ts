@@ -1,6 +1,6 @@
 import { CommandInteraction, LocalizationMap, Locale, AutocompleteInteraction } from "discord.js";
 import logger from "./logger";
-import { i18nReady, getTfunc, getCommandString } from "./i18n";
+import { getTfunc, getCommandString } from "./i18n";
 import config from "./config.json";
 import { devicePermission, searchDevices } from "./deviceManager";
 

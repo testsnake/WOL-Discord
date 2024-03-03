@@ -5,6 +5,8 @@ import { devicePermission, wake } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
 import { commandLocalisation, commandDescription } from "../utils";
+import { getTfunc } from "../i18n";
+import config from "../config.json";
 
 const requiredPermissions: devicePermission = {
     wol: true
@@ -21,8 +23,9 @@ export class WakeOnLan {
         description: commandDescription("wol"),
         nameLocalizations: commandLocalisation("wol", "name"),
         descriptionLocalizations: commandLocalisation("wol", "description"),
+        defaultMemberPermissions: ["Administrator"],
+        dmPermission: true,
     })
-    
     private async wol(
         @SlashOption({
             autocomplete: deviceAutoComplete(requiredPermissions),
@@ -37,14 +40,11 @@ export class WakeOnLan {
     ): Promise<void> {
             
         // Command Handler
-        interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ ephemeral: true });
 
-        // Get the device ID
-        const deviceId = searchText;
-
-        // Wake up the device
-        const result = await wake(deviceId, interaction, requiredPermissions);
-
-        interaction.editReply("not implemented yet!")
+        const t = getTfunc(interaction.locale);
+        
+        const result = await wake(searchText, interaction, requiredPermissions);
+        interaction.editReply(t(`commands:wol.deviceResponse`, { context: result.mac && config.showDeviceMac ? `${result.result}_mac` : result.result, device: result.device, mac: result.mac}));
     }
 }

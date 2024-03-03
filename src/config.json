@@ -1,3 +1,5 @@
 {
-    "allowCommandsInGuilds": true
+    "allowCommandsInGuilds": true,
+    "showDeviceIP": true,
+    "showDeviceMac": true
 }

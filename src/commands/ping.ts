@@ -1,11 +1,11 @@
 import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Guard, Slash, SlashOption } from "discordx";
-import { ActionResult, devicePermission, sendPing } from "../deviceManager";
+import { devicePermission, sendPing } from "../deviceManager";
 import { RateLimit, TIME_UNIT } from "@discordx/utilities";
 import { deviceAutoComplete, rateLimitMessage } from "../utils";
 import { commandLocalisation, commandDescription } from "../utils";
 import { getTfunc } from "../i18n";
-import logger from "../logger";
+import config from "../config.json";
 
 const requiredPermissions: devicePermission = {
     ping: true
@@ -23,6 +23,8 @@ export class Ping {
         description: commandDescription("ping"),
         nameLocalizations: commandLocalisation("ping", "name"),
         descriptionLocalizations: commandLocalisation("ping", "description"),
+        defaultMemberPermissions: ["Administrator"],
+        dmPermission: true,
     })
     private async ping(
         @SlashOption({
@@ -36,7 +38,7 @@ export class Ping {
         }) searchText: string,
         interaction: CommandInteraction
     ): Promise<void> {
-        const sent = await interaction.deferReply({ ephemeral: true, fetchReply: true});
+        const sent = await interaction.deferReply({ ephemeral: interaction.guild ? true : false, fetchReply: true});
         let t = getTfunc(interaction.locale);
         if (!searchText) {
             let responseTime = sent.createdTimestamp - interaction.createdTimestamp;
@@ -48,7 +50,7 @@ export class Ping {
         if (typeof result !== 'object') {
             interaction.editReply(t(`common:command.errorTitle`, { error: t(`commands:ping.error`, {context: result}) } ));
         } else {
-            interaction.editReply(t('commands:ping.deviceResponse', { context: `${result.alive}`, host: result.host, avg: result.avg, max: result.max, min: result.min, packetLoss: result.packetLoss}));
+            interaction.editReply(t('commands:ping.deviceResponse', { context: `${result.alive}_${config.showDeviceIP}`, host: result.host, avg: result.avg, max: result.max, min: result.min, packetLoss: result.packetLoss}));
         } 
     }
 }

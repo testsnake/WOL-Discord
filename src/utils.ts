@@ -23,7 +23,7 @@ function rateLimitMessage(
     let t = getTfunc(interaction.locale);
 
     return Promise.resolve(
-      t('common:command.timeout', { time: `<t:${Math.floor((Date.now() + timeLeft) / 1000,)}:R>`})
+      t('common:command.timeout', { time: `<t:${Math.floor((interaction.createdTimestamp + timeLeft) / 1000,)}:R>`})
     );
 
 }

@@ -2,5 +2,7 @@
     "allowCommandsInGuilds": true,
     "showDeviceIP": true,
     "showDeviceMac": true,
-    "devicesFilePath": "./devices.json"
+    "devicesFilePath": "./devices.json",
+    "checkPingAfterWake": true,
+    "waitTimeAfterWake": 30
 }

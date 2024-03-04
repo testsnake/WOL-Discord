@@ -1,15 +1,20 @@
 import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js';
 import { Discord, Guard, Slash, SlashOption } from 'discordx';
 
-import { devicePermission, wake } from '../deviceManager';
+import { devicePermission, wake, sendPing, ActionResult } from '../deviceManager';
 import { RateLimit, TIME_UNIT } from '@discordx/utilities';
 import { deviceAutoComplete, rateLimitMessage } from '../utils';
 import { commandLocalisation, commandDescription } from '../utils';
 import { getTfunc } from '../i18n';
 import config from '../config.json';
+import logger from '../logger';
 
 const requiredPermissions: devicePermission = {
     wol: true
+};
+
+const requiredPingPermissions: devicePermission = {
+    ping: true
 };
 
 @Discord()
@@ -41,8 +46,9 @@ export class WakeOnLan {
         searchText: string,
         interaction: CommandInteraction
     ): Promise<void> {
+        const isEphemeral = interaction.guild ? true : false;
         // Command Handler
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ ephemeral: isEphemeral });
 
         const t = getTfunc(interaction.locale);
 
@@ -54,5 +60,36 @@ export class WakeOnLan {
                 mac: result.mac
             })
         );
+
+        if (config.checkPingAfterWake) {
+            // Wait 30 seconds, ping check
+            setTimeout(async () => {
+                const pingResult = await sendPing(searchText, interaction, requiredPingPermissions);
+                if (typeof pingResult !== 'object') {
+                    if (pingResult === ActionResult.PermissionDenied) {
+                        // Permission denied
+                        return;
+                    }
+                    interaction.followUp({
+                        content: t(`common:command.errorTitle`, {
+                            error: t(`commands:ping.error`, { context: pingResult })
+                        }),
+                        ephemeral: isEphemeral
+                    });
+                } else {
+                    logger.debug(`${pingResult.alive}_false`);
+                    interaction.followUp({
+                        content: t(`commands:ping.deviceResponse`, {
+                            context: `${pingResult.alive}_false`,
+                            avg: pingResult.avg,
+                            max: pingResult.max,
+                            min: pingResult.min,
+                            packetLoss: pingResult.packetLoss
+                        }),
+                        ephemeral: isEphemeral
+                    });
+                }
+            }, config.waitTimeAfterWake * 1000);
+        }
     }
 }

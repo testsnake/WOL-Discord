@@ -42,7 +42,7 @@ export class WakeOnLan {
         interaction: CommandInteraction
     ): Promise<void> {
         // Command Handler
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ ephemeral: interaction.guild ? true : false });
 
         const t = getTfunc(interaction.locale);
 

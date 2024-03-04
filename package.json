@@ -1,7 +1,7 @@
 {
   "name": "wol-discord",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "Discord bot that can wake a device with Wake-On-Lan",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/testsnake/WOL-Discord.git"
   },
   "author": "testsnake",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/testsnake/WOL-Discord/issues"
   },

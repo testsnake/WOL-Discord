@@ -38,6 +38,12 @@ jobs:
                     echo "::set-output name=changes::true"
                   fi
 
+            - name: No changes to commit
+              if: steps.git-check.outputs.changes == 'false'
+              run: |
+                echo "No changes detected. Exiting..."
+                exit 0
+                  
             - name: Commit and Push changes
               if: steps.git-check.outputs.changes == 'true'
               uses: stefanzweifel/git-auto-commit-action@v4

@@ -1,53 +1,14 @@
-name: Auto-Format on PR Merge
+name: Format On Push
 
 on:
-    pull_request:
-        types: [closed]
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    format-and-commit:
-        runs-on: ubuntu-latest
-        if: github.event.pull_request.merged == true
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  ref: ${{ github.event.pull_request.head.ref }}
-                  fetch-depth: 0
-                  persist-credentials: true
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '21'
-                  cache: 'npm'
-
-            - name: Install dependencies
-              run: npm install
-
-            - name: Run Prettier
-              run: npm run format
-
-            - name: Check for changes
-              id: git-check
-              run: |
-                  if git diff --exit-code; then
-                    echo "::set-output name=changes::false"
-                  else
-                    echo "::set-output name=changes::true"
-                  fi
-
-            - name: No changes to commit
-              if: steps.git-check.outputs.changes == 'false'
-              run: |
-                echo "No changes detected. Exiting..."
-                exit 0
-                  
-            - name: Commit and Push changes
-              if: steps.git-check.outputs.changes == 'true'
-              uses: stefanzweifel/git-auto-commit-action@v4
-              with:
-                  commit_message: '[AUTO] Apply code formatting'
-                  branch: main
-                  file_pattern: src/**/*.*
+  format-code:
+    uses: testsnake/prettier-auto-format-action/.github/workflows/auto-format-pnpm.yml@v0.0.1
+    with:
+      ref: ${{ github.ref }}
+      node-version: '20'
+    secrets: inherit
